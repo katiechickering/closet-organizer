@@ -1,5 +1,5 @@
 import {Router} from "express"
-import { createClothingItem, deleteClothingItemById, getAllClothingItems, getClothingItemById, updateClothingItemById } from "../controllers/clothingItem.controller"
+import { createClothingItem, deleteClothingItemById, getAllClothingItems, getClothingItemById, updateClothingItemById } from "../controllers/clothingItem.controller.js"
 
 const clothingItemRouter = Router()
 
