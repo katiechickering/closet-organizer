@@ -4,17 +4,17 @@ import { getUserProfile, getUsers, loginUser, logOutUser, registerUser } from ".
 
 const userRouter = Router()
 
-router.route('/')
+userRouter.route('/')
     .get( protect, getUsers )
     .post( registerUser )
 
-router.route('/profile')
+userRouter.route('/profile')
     .get( protect, getUserProfile )
 
-router.route('/login')
+userRouter.route('/login')
     .post( loginUser )
 
-router.route('/logout')
+userRouter.route('/logout')
     .post( logOutUser )
 
 export default userRouter
