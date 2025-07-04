@@ -24,7 +24,6 @@ userSchema.virtual('confirmPassword')
         this._confirmPassword = value;
     });
 
-
 userSchema.pre('validate', function (next) { 
     if (this.isModified('password') && this.password !== this.confirmPassword) {
         this.invalidate('confirmPassword', 'Passwords must match');
@@ -45,7 +44,6 @@ userSchema.pre('save', async function (next) {
     
     return next();
 });
-
 
 userSchema.methods.matchPassword = async function (enteredPassword) {
     return await bcrypt.compare(enteredPassword, this.password);
