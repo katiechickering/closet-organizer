@@ -11,7 +11,7 @@ const clothingItemSchema = new Schema(
         category: {
             type: String,
             required: [true, "Category is required"],
-            enum: [ "Tops", "Bottoms", "Dresses", "Footwear"],
+            enum: [ "tops", "bottoms", "dresses", "footwear"],
         },
         size: {
             type: String,
@@ -38,7 +38,20 @@ const clothingItemSchema = new Schema(
         style: {
             type: String,
             required: [true, "Style is required"],
-            enum: [ "Casual", "Business", "Formal", "Sport"],
+            enum: [ "casual", "business", "formal", "sport"],
+        },
+        image: {
+            type: String,
+            required: [true, "Image is required."],
+            validate: {
+                validator: v => /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i.test(v), 
+                message: props => `${props.value} is not a valid URL.`
+            }
+        },
+        user: {
+            type: Schema.Types.ObjectId,
+            ref: "User",
+            required: true,
         }
     },
     { timestamps : true }
