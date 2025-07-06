@@ -21,9 +21,9 @@ function App() {
         <Route path='/register' element={<RegistrationForm />} />
         <Route path="/login" element={<LoginForm />} />
         <Route path="/" element={<Home />} />
-        <Route path="clothingItem/add" element={<ClothingItemForm />} />
-        <Route path="clothingItem/details/:id" element={<ViewClothingItem setHeaderInfo={setHeaderInfo}/>} />
-        <Route path="clothingItem/update/:id" element={<ClothingItemForm setHeaderInfo={setHeaderInfo}/>} />
+        <Route path="/clothingItem/add" element={<ClothingItemForm />} />
+        <Route path="/clothingItem/details/:id" element={<ViewClothingItem setHeaderInfo={setHeaderInfo}/>} />
+        <Route path="/clothingItem/update/:id" element={<ClothingItemForm setHeaderInfo={setHeaderInfo}/>} />
       </Routes>
       <ToastContainer
         position="top-center"

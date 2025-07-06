@@ -1,0 +1,33 @@
+@import "tailwindcss";
+
+@theme {
+    --color-brandNavy: #22223B;
+    --color-brandBlue: #4A4E69;
+    --color-brandMauve: #9A8C98;
+    --color-brandTan: #C9ADA7;
+    --color-brandBeige: #F2E9E4;
+}
+
+@layer base {
+    body {
+        @apply font-serif text-brandNavy
+    }
+    a, button, select {
+        @apply bg-brandBeige hover:bg-brandTan border border-brandNavy rounded shadow py-2 text-center
+    }
+    a, button {
+        @apply px-4
+    }
+    input {
+        @apply bg-white rounded border border-brandNavy ml-2 px-2
+    }
+}
+
+@layer components {
+    .backgroundLayout {
+        @apply flex flex-col w-screen min-h-screen h-full p-8 bg-brandBeige
+    }
+    .error {
+        @apply border-red-500 border-3
+    }
+}
