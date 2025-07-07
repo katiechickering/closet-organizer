@@ -35,7 +35,7 @@ export const LoginForm = () => {
                 </p>
             </div>
 
-            <form onSubmit={handleSubmit} className="border-2 border-brandNavy bg-brandBlue text-brandNavy p-10">
+            <form onSubmit={handleSubmit} className="border-2 border-brandNavy bg-brandBlue text-brandNavy p-10 rounded">
                 <p className="text-center text-4xl mb-8 text-white">Login</p>
 
                 <div className="mb-5">

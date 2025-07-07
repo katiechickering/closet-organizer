@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import { register } from '../services/user.service'
+import { checkUserName, register } from '../services/user.service'
 import { useState } from 'react'
 import { useLogin } from '../context/UserContext'
 import { toast } from "react-toastify"
@@ -58,17 +58,34 @@ export const RegistrationForm = () => {
         return true
     }
 
+    // Check if userName already exists
+    const userNameExists = async (userName) => {
+        try {
+            const res = await checkUserName(userName);
+            return res;
+        } catch (error) {
+            console.log("checkUserName error:", error);
+            setDataErrors(prev => ({...prev, checkUserNameRequest: "Unable to validate user name."}));
+            toast.error("Unable to validate user name.");
+            return true; 
+        }
+    }
+
     // Submit form
-    const handleSubmit = e => {
+    const handleSubmit = async e => {
         e.preventDefault()
         if (!isReadyToSubmit()){
-            toast.error("Please make corrections to the form.")
+            return toast.error("Please make corrections to the form.")
+        }
+        let { userName, password, confirmPassword } = e.target
+        userName = userName.value 
+        confirmPassword = confirmPassword.value 
+        password = password.value
+        const exists = await userNameExists(userName)
+        if (exists) {
+            return toast.error("User name already exists or could not be validated.")
         }
         else {
-            let { userName, password, confirmPassword } = e.target
-            userName = userName.value 
-            confirmPassword = confirmPassword.value 
-            password = password.value 
             register({userName, password, confirmPassword})
                 .then( ()=>{ 
                     login()
@@ -87,7 +104,7 @@ export const RegistrationForm = () => {
     return(
         <div className="backgroundLayout items-center flex flex-col">
 
-            <form onSubmit={handleSubmit} className="border-2 border-brandNavy bg-brandBlue text-brandNavy p-10">
+            <form onSubmit={handleSubmit} className="border-2 border-brandNavy bg-brandBlue text-brandNavy p-10 rounded">
                 <p className="text-center text-4xl mb-8 text-white">Register</p>
 
                 <div className="mb-5">
@@ -133,6 +150,11 @@ export const RegistrationForm = () => {
                 {dataErrors.createRequest &&
                     <p className="text-red-500 text-center">
                         {dataErrors.createRequest}
+                    </p>
+                }
+                {dataErrors.checkUserNameRequest &&
+                    <p className="text-red-500 text-center">
+                        {dataErrors.checkUserNameRequest}
                     </p>
                 }
 

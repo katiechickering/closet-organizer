@@ -38,7 +38,7 @@ const clothingItemSchema = new Schema(
         style: {
             type: String,
             required: [true, "Style is required"],
-            enum: [ "casual", "business", "formal", "sport"],
+            enum: ["casual", "business", "formal", "sport"],
         },
         image: {
             type: String,

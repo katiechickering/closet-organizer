@@ -39,3 +39,14 @@ export const getAllUsers = async () => {
         return RES.data
     } catch( error ){ throw error }
 }
+
+export const checkUserName = async (userName) => {
+    try {
+        const RES = await USER_INSTANCE.get(
+            '/checkUserName',
+            { params: { userName } }
+        )
+        return RES.data.exists
+    }
+    catch( error ){ throw error }
+}

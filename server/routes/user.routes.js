@@ -1,6 +1,6 @@
 import { Router } from "express"
 import { protect } from "../middleware/authMiddleware.js"
-import { getUserProfile, getUsers, loginUser, logOutUser, registerUser } from "../controllers/user.controller.js"
+import { checkUserName, getUserProfile, getUsers, loginUser, logOutUser, registerUser } from "../controllers/user.controller.js"
 
 const userRouter = Router()
 
@@ -16,5 +16,8 @@ userRouter.route('/login')
 
 userRouter.route('/logout')
     .post( logOutUser )
+
+userRouter.route('/checkUserName')
+    .get( checkUserName )
 
 export default userRouter

@@ -51,4 +51,16 @@ export const getUserProfile = async (req, res) => {
     } catch (error) {
         res.status(400).json({ message: error.message || 'An error occurred while fetching the profile.' })
     }
-};
+}
+
+// Check if userName exists
+export const checkUserName = async (req, res) => {
+    try {
+        const {userName} = req.query
+        const USER = await User.findOne({ userName });
+        res.status(200).json({ exists: !!USER })
+    } catch (error) {
+        res.status(400).json({ message: error.message || 'An error occurred while fetching users.' })
+    }
+
+}
