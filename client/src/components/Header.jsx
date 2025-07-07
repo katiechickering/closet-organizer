@@ -20,7 +20,7 @@ export const Header = ({headerInfo}) => {
         linkText = "Add Clothing Item to Closet"
     }
     else if (pathname == "/clothingItem/add") { // Create a Clothing Item Header
-        headerText = "Add Clothing Item to Closet"
+        headerText = "Add Clothing Item"
         route = "/"
         linkText = "View Closet"
     }
