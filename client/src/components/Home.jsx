@@ -47,7 +47,7 @@ export const Home = () => {
             }
             
             <div className="bg-brandBlue border-t border-amber-50 h-200 overflow-y-auto max-w-3xs px-4 py-16 sm:px-6 sm:py-24 lg:max-w-2xs lg:px-8">
-                <h2 className="text-white text-center text-3xl">Tops</h2>
+                <h2 className="text-white text-center text-3xl mb-6">Tops</h2>
                 <div className="flex flex-col space-y-10">
                     {topItems.length > 0 ? (
                         topItems.map(({ name, image, _id }) => (
@@ -66,7 +66,7 @@ export const Home = () => {
                 </div>
             </div>
             <div className="bg-brandBlue border-1 border-amber-50 h-200 overflow-y-auto max-w-3xs px-4 py-16 sm:px-6 sm:py-24 lg:max-w-2xs lg:px-8">
-                <h2 className="text-white text-center text-3xl">Bottoms</h2>
+                <h2 className="text-white text-center text-3xl mb-6">Bottoms</h2>
                 <div className="flex flex-col space-y-10">
                     {bottomItems.length > 0 ? (
                         bottomItems.map(({ name, image, _id }) => (
@@ -85,7 +85,7 @@ export const Home = () => {
                 </div>
             </div>
             <div className="bg-brandBlue border-1 border-amber-50 h-200 overflow-y-auto max-w-3xs px-4 py-16 sm:px-6 sm:py-24 lg:max-w-2xs lg:px-8">
-                <h2 className="text-white text-center text-3xl">Dresses</h2>
+                <h2 className="text-white text-center text-3xl mb-6">Dresses</h2>
                 <div className="flex flex-col space-y-10">
                     {dressItems.length > 0 ? (
                         dressItems.map(({ name, image, _id }) => (
@@ -105,7 +105,7 @@ export const Home = () => {
             </div>
 
             <div className="bg-brandBlue border-1 border-amber-50 h-200 overflow-y-auto max-w-3xs px-4 py-16 sm:px-6 sm:py-24 lg:max-w-2xs lg:px-8">
-                <h2 className="text-white text-center text-3xl">Footwear</h2>
+                <h2 className="text-white text-center text-3xl mb-6">Footwear</h2>
                 <div className="flex flex-col space-y-10">
                     {footwearItems.length > 0 ? (
                         footwearItems.map(({ name, image, _id }) => (
