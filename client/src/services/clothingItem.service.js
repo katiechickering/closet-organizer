@@ -6,6 +6,13 @@ const CLOTHING_ITEM_INSTANCE = axios.create({
 })
 
 // Read
+export const getAllClothingItems = async (allClothingItems) => {
+    try {
+    const RES = await CLOTHING_ITEM_INSTANCE.get('/')
+    return RES.data
+    } catch (error) { throw error}
+}
+
 export const getClothingItemById = async (id) => {
     try {
         const RES = await CLOTHING_ITEM_INSTANCE.get(`/${id}`)
@@ -30,4 +37,12 @@ export const createClothingItem = async (newClothingItem) => {
         return RES.data
     }
     catch (error) {throw error}
+}
+
+// Delete
+export const deleteClothingItemById = async (id) => {
+    try {
+        const RES = await CLOTHING_ITEM_INSTANCE.delete(`${id}` )
+        return RES.data
+    } catch(error) {throw error}
 }
