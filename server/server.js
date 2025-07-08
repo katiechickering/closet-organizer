@@ -6,10 +6,7 @@ import clothingItemRouter from "./routes/clothingItem.routes.js"
 import userRouter from "./routes/user.routes.js"
 import cookieParser from 'cookie-parser'
 
-config({ path: ".env" });
-if (process.env.NODE_ENV === "production") {
-    config({ path: ".env.production" });
-}
+config()
 
 const PORT = process.env.PORT
 dbConnect()

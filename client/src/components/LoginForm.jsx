@@ -5,13 +5,10 @@ import { useState, useEffect } from "react"
 import { toast } from "react-toastify"
 
 export const LoginForm = () => {
+    
     const navigate = useNavigate()
     const { login:loginUser } = useLogin()
-    const [ error, setError ] = useState('')
-
-    useEffect(() => {
-        if (error) toast.error(error)
-    }, [error])
+    const [ apiErrors, setApiErrors ] = useState({})
 
     const handleSubmit = e => {
         e.preventDefault()
@@ -22,7 +19,11 @@ export const LoginForm = () => {
                 toast.success("Login sussessful!")
                 navigate('/')  
             } )
-            .catch( error => setError(error))
+            .catch( error => {
+                console.log("login error:", error)
+                setApiErrors(prev => ({...prev, loginRequest: "Unable to login."}))
+                toast.error("Unable to login.")
+            })
     }
 
     return(
@@ -39,12 +40,13 @@ export const LoginForm = () => {
                 <p className="text-center text-4xl mb-8 text-white">Login</p>
 
                 <div className="mb-5">
-                    <label htmlFor="usertName" className="text-white">User Name:</label>
+                    <label htmlFor="userName" className="text-white">User Name:</label>
                         <input
                             type="text"
                             name="userName"
                             id="userName"
                             required
+                            autoComplete="username"
                         />
                 </div>
 
@@ -55,10 +57,11 @@ export const LoginForm = () => {
                             name="password"
                             id="password"
                             required
+                            autoComplete="current-password"
                         />
                 </div>
 
-                {error && <p className="text-red-500 text-center mb-5">{error}</p>}
+                {apiErrors.loginRequest && <p className="text-red-500 text-center mb-5">{apiErrors.loginRequest}</p>}
                 <div className="flex justify-center w-full">
                     <button type="submit">Login</button>
                 </div>
