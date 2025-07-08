@@ -61,14 +61,27 @@ export const ViewClothingItem = ({ setHeaderInfo }) => {
                     <img className="h-123 m-w-2xl" src={clothingItem.image} alt={clothingItem.name} />
                 </div>
 
-                <div className="items-center text-2xl leading-relaxed text-center w-2xl my-10 h-125 border-2 border-gray-600 p-4 rounded-md bg-brandBlue text-white">
-                    <p><strong>Name:</strong> {clothingItem.name}</p>
-                    <p><strong>Category:</strong> {clothingItem.category}</p>
-                    <p><strong>Size:</strong> {clothingItem.size}</p>
-                    <p><strong>Brand:</strong> {clothingItem.brand}</p>
-                    <p><strong>Color:</strong> <div className="border border-gray-400 inline-block h-6 w-25" style={{ backgroundColor: clothingItem.color }}></div></p>
-                    <p><strong>Material:</strong> {clothingItem.material}</p>
-                    <p><strong>Style:</strong> {clothingItem.style}</p>
+                <div className="flex flex-col justify-center items-center text-2xl leading-relaxed text-center w-2xl my-10 h-125 border-2 border-gray-600 p-4 rounded-md bg-brandBlue text-white">
+                    <div className="flex space-x-2">
+                        <p className="font-bold">Name: </p><p> {clothingItem.name}</p>
+                    </div>
+                    <div className="flex space-x-2">
+                        <p className="font-bold">Category: </p><p> {clothingItem.category}</p>
+                    </div>
+                    <div className="flex space-x-2">
+                        <p className="font-bold">Size: </p> <p>{clothingItem.size}</p>
+                    </div>
+                    <div className="flex space-x-2">
+                        <p className="font-bold">Brand: </p> <p>{clothingItem.brand}</p>
+                    </div>
+                    <div className="flex space-x-2">
+                        <p className="font-bold">Color: </p> <p><span className="border border-gray-400 inline-block h-6 w-25" 
+                            style={{ backgroundColor: clothingItem.color }}></span>
+                        </p>
+                    </div>
+                    <div className="flex space-x-2">
+                        <p className="font-bold">Style: </p><p>{clothingItem.style}</p>
+                    </div>
                 </div>
 
             </div>
