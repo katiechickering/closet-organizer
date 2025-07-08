@@ -23,28 +23,28 @@ export const ClothingItemForm = ({setHeaderInfo}) => {
     const [formData, setFormData] = useState(DEFAULT_FORM_VALUES)
     const [formErrors, setFormErrors] = useState({})
     const [loading, setLoading] = useState({clothingItem: "Loading clothing item details..."})
-    const [dataErrors, setDataErrors] = useState({})
+    const [apiErrors, setApiErrors] = useState({})
     const navigate = useNavigate()
     const {id} = useParams()
     const { isLoggedIn } = useLogin()
 
     // Load page as the create form or edit form based on the url
     useEffect(() => {
-        // if( !isLoggedIn ){
-        //     navigate('/login')
-        // }
-        if (id) {
+        if( !isLoggedIn ){
+            navigate('/login')
+        }
+        else if (id) {
             getClothingItemById(id)
-            .then(res => {
-                setFormData(res)
-                setHeaderInfo(res)
-            })
-            .catch(error => {
-                console.log("getClothingItemById error:", error)
-                setDataErrors(prev => ({...prev, getRequest: "Unable to load clothing item details."}))
-                toast.error("Unable to load clothing item details.")
-            })
-            .finally(() => setLoading(prev => ({...prev, clothingItem: false})))
+                .then(res => {
+                    setFormData(res)
+                    setHeaderInfo(res)
+                })
+                .catch(error => {
+                    console.log("getClothingItemById error:", error)
+                    setApiErrors(prev => ({...prev, getRequest: "Unable to load clothing item details."}))
+                    toast.error("Unable to load clothing item details.")
+                })
+                .finally(() => setLoading(prev => ({...prev, clothingItem: false})))
         } else {
             setFormData(DEFAULT_FORM_VALUES)
             setLoading(prev => ({...prev, clothingItem: false}))
@@ -116,27 +116,27 @@ export const ClothingItemForm = ({setHeaderInfo}) => {
         }
         else if (id) {
             updateClothingItem(formData)
-            .then(() => {
-                toast.success("Clothing item updated successfully!")
-                navigate(`/clothingItem/details/${id}`)
-            })
-            .catch((error) => {
-                console.log("updateClothingItem error:", error)
-                setDataErrors(prev => ({...prev, updateRequest: "Unable to update clothing item."}))
-                toast.error("Unable to update clothing item.")
-            })
+                .then(() => {
+                    toast.success("Clothing item updated successfully!")
+                    navigate(`/clothingItem/details/${id}`)
+                })
+                .catch((error) => {
+                    console.log("updateClothingItem error:", error)
+                    setApiErrors(prev => ({...prev, updateRequest: "Unable to update clothing item."}))
+                    toast.error("Unable to update clothing item.")
+                })
         }
         else {
             createClothingItem(formData)
-            .then(res => {
-                toast.success("Clothing item created successfully!")
-                navigate("/")
-            })
-            .catch((error) => {
-                console.log("createClothingItem error:", error)
-                setDataErrors(prev => ({...prev, createRequest: "Unable to create clothing item."}))
-                toast.error("Unable to create clothing item.")
-            })
+                .then(res => {
+                    toast.success("Clothing item created successfully!")
+                    navigate("/")
+                })
+                .catch((error) => {
+                    console.log("createClothingItem error:", error)
+                    setApiErrors(prev => ({...prev, createRequest: "Unable to create clothing item."}))
+                    toast.error("Unable to create clothing item.")
+                })
         }
     }
 
@@ -145,10 +145,10 @@ export const ClothingItemForm = ({setHeaderInfo}) => {
 
             {/* Form */}
             <form onSubmit={handleSubmit} className="border-2 border-brandNavy bg-brandBlue text-brandNavy p-10 rounded">
-                {loading.clothingItem && <p>{loading.clothingItem}</p>}
-                {dataErrors.getRequest &&
+                {loading.clothingItem && <p className="text-center">{loading.clothingItem}</p>}
+                {apiErrors.getRequest &&
                     <p className="text-red-500 text-center">
-                        {dataErrors.getRequest}
+                        {apiErrors.getRequest}
                     </p>
                 }
 
@@ -280,14 +280,14 @@ export const ClothingItemForm = ({setHeaderInfo}) => {
                     </button>
                 </div>
 
-                {dataErrors.createRequest &&
+                {apiErrors.createRequest &&
                     <p className="text-red-500 text-center">
-                        {dataErrors.createRequest}
+                        {apiErrors.createRequest}
                     </p>
                 }
-                {dataErrors.updateRequest &&
+                {apiErrors.updateRequest &&
                     <p className="text-red-500 text-center">
-                        {dataErrors.updateRequest}
+                        {apiErrors.updateRequest}
                     </p>
                 }
 

@@ -11,9 +11,10 @@ const DEFAULT_FORM_VALUES = {
 }
 
 export const RegistrationForm = () => {
+    
     const navigate = useNavigate()
     const { login } = useLogin()
-    const [ dataErrors, setDataErrors ] = useState({})
+    const [ apiErrors, setApiErrors ] = useState({})
     const [formData, setFormData] = useState(DEFAULT_FORM_VALUES)
     const [formErrors, setFormErrors] = useState({})
 
@@ -61,13 +62,12 @@ export const RegistrationForm = () => {
     // Check if userName already exists
     const userNameExists = async (userName) => {
         try {
-            const res = await checkUserName(userName);
-            return res;
+            return await checkUserName(userName)
         } catch (error) {
-            console.log("checkUserName error:", error);
-            setDataErrors(prev => ({...prev, checkUserNameRequest: "Unable to validate user name."}));
-            toast.error("Unable to validate user name.");
-            return true; 
+            console.log("checkUserName error:", error)
+            setApiErrors(prev => ({...prev, checkUserNameRequest: "Unable to validate user name."}))
+            toast.error("Unable to validate user name.")
+            return true
         }
     }
 
@@ -94,7 +94,7 @@ export const RegistrationForm = () => {
                 })
                 .catch( error => {
                     console.log("registerAccount error:", error)
-                    setDataErrors(prev => ({...prev, createRequest: "Unable to create account."}))
+                    setApiErrors(prev => ({...prev, createRequest: "Unable to create account."}))
                     toast.error("Unable to create account.")
                 }
             )
@@ -108,7 +108,7 @@ export const RegistrationForm = () => {
                 <p className="text-center text-4xl mb-8 text-white">Register</p>
 
                 <div className="mb-5">
-                    <label htmlFor="usertName" className="text-white">User Name:</label>
+                    <label htmlFor="userName" className="text-white">User Name:</label>
                         <input
                             type="text"
                             value={formData.userName}
@@ -116,6 +116,7 @@ export const RegistrationForm = () => {
                             name="userName"
                             id="userName"
                             required
+                            autoComplete="username"
                         />
                 </div>
 
@@ -129,6 +130,7 @@ export const RegistrationForm = () => {
                             name="password"
                             id="password"
                             required
+                            autoComplete="new-password"
                             className={formErrors.confirmPassword ? "error" : ""}
                         />
                 </div>
@@ -147,14 +149,14 @@ export const RegistrationForm = () => {
                     />
                 </div>
 
-                {dataErrors.createRequest &&
+                {apiErrors.createRequest &&
                     <p className="text-red-500 text-center">
-                        {dataErrors.createRequest}
+                        {apiErrors.createRequest}
                     </p>
                 }
-                {dataErrors.checkUserNameRequest &&
+                {apiErrors.checkUserNameRequest &&
                     <p className="text-red-500 text-center">
-                        {dataErrors.checkUserNameRequest}
+                        {apiErrors.checkUserNameRequest}
                     </p>
                 }
 

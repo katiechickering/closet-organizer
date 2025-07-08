@@ -14,28 +14,28 @@ export const Header = ({headerInfo}) => {
     let route
     let linkText
 
-    if (pathname == "/") { // Homepage Header
+    if (pathname == "/") { // Homepage header
         headerText = "Closet Organizer"
         route = "/clothingItem/add"
         linkText = "Add Clothing Item to Closet"
     }
-    else if (pathname == "/clothingItem/add") { // Create a Clothing Item Header
+    else if (pathname == "/clothingItem/add") { // Create a Clothing Item header
         headerText = "Add Clothing Item"
         route = "/"
         linkText = "View Closet"
     }
-    else if (pathname.startsWith("/clothingItem/update")) { // Update a Clothing Item Header
+    else if (pathname.startsWith("/clothingItem/update")) { // Update Clothing Item header
         headerText = `Update Your ${headerInfo.name}`
         route = `/clothingItem/details/${headerInfo._id}`
         linkText = "View Clothing Item"
     }
-    else if (pathname == "/login" || pathname == "/register") { // Update a Clothing Item Header
-        headerText = "Closet Organizer"
-    }
-    else {
-        headerText = `${headerInfo.name} Details` // Clothing Item Details Header
+    else if (pathname.startsWith("/clothingItem/details")){
+        headerText = `${headerInfo.name} Details` // Clothing Item Details header
         route = "/"
         linkText = "View Closet"
+    }
+    else { // Login and Register header
+        headerText = "Closet Organizer"
     }
 
     // Logout button
@@ -45,7 +45,10 @@ export const Header = ({headerInfo}) => {
             userLogout()
             toast.success("Logout successful!")
             navigate('/login')
-        } catch( error ){ console.error('Logout Failed:', error) }
+        } catch( error ){ 
+            console.error('Logout Failed:', error)
+            toast.error("Unable to logout.")
+        }
     }
 
     return (
