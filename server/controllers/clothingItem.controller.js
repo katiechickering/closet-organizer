@@ -14,7 +14,6 @@ export const createClothingItem = async (req, res) => {
 // Read
 export const getAllClothingItems = async (req, res) => {
     try {
-        console.log(req.user)
         const CLOTHINGITEMS = await ClothingItem.find({ user: req.user.id })
         if (!CLOTHINGITEMS) return res.status(404).json({ error: "Clothing items not found" })
         res.status(201).json(CLOTHINGITEMS)
@@ -54,7 +53,7 @@ export const deleteClothingItemById = async (req, res) => {
     try {
         const DELETED_CLOTHINGITEM = await ClothingItem.findById(req.params.id)
         if (!DELETED_CLOTHINGITEM) return res.status(404).json({ error: "Clothing item not found" })
-        if (item.user.toString() !== req.user.id) {
+        if (DELETED_CLOTHINGITEM.user.toString() !== req.user.id) {
             return res.status(403).json({ error: "Access Denied" })
         }
         await ClothingItem.findByIdAndDelete(req.params.id)
