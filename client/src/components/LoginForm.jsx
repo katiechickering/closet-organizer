@@ -5,7 +5,7 @@ import { useState, useEffect } from "react"
 import { toast } from "react-toastify"
 
 export const LoginForm = () => {
-    
+
     const navigate = useNavigate()
     const { login:loginUser } = useLogin()
     const [ apiErrors, setApiErrors ] = useState({})
@@ -16,7 +16,7 @@ export const LoginForm = () => {
         login( { userName: userName.value, password: password.value } )
             .then( ()=> {
                 loginUser()
-                toast.success("Login sussessful!")
+                toast.success("Login successful!")
                 navigate('/')  
             } )
             .catch( error => {
