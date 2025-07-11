@@ -26,7 +26,7 @@ Katie Chickering - https://github.com/katiechickering
 
 [Click here to view my deployed app!](https://main.dsrw9hnagm1lz.amplifyapp.com/)
 
-To deploy our application, we used AWS App Runner for the backend API, and AWS Amplify for the frontend. Both services are connected to this GitHub monorepo and automatically update whenever changes are pused to the repository. Environment variables were configured through the App Runner and Amplify interfaces. App Runner routes to the `server` folder, while Amplify routes to the `client` folder. To host the database, we used MongoDB Atlas.
+To deploy our application, we used AWS App Runner for the backend API, and AWS Amplify for the frontend. Both services are connected to this GitHub monorepo and automatically update whenever changes are pushed to the repository. Environment variables were configured through the App Runner and Amplify interfaces. App Runner routes to the `server` folder, while Amplify routes to the `client` folder. To host the database, we used MongoDB Atlas.
 
 
 ## ⬇️ Local Installation
