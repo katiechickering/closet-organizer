@@ -3,12 +3,43 @@ import { useNavigate } from "react-router-dom"
 import { useLogin } from '../context/UserContext'
 import { useState, useEffect } from "react"
 import { toast } from "react-toastify"
+import { pingServer } from "../services/ping.service"
 
 export const LoginForm = () => {
 
     const navigate = useNavigate()
-    const { login:loginUser } = useLogin()
+    const { login: loginUser } = useLogin()
+
     const [ apiErrors, setApiErrors ] = useState({})
+    const [serverReady, setServerReady] = useState(false)
+    const [checkingServer, setCheckingServer] = useState(true)
+
+    // Wake the backend free server
+    useEffect(() => {
+        pingServer()
+            .then(res => {
+                if (res) {
+                    setServerReady(true)
+                    setCheckingServer(false)
+                }
+                else toast.error("Server not ready")
+            })
+            .catch(error => {
+                let attempts = 0
+                const interval = setInterval(async () => {
+                    attempts++
+                    if (await pingServer()) {
+                        setServerReady(true)
+                        clearInterval(interval)
+                    }
+                    if (attempts > 10) {
+                        clearInterval(interval)
+                        setCheckingServer(false)
+                        toast.error("Server not responding")
+                    }
+                }, 5000)
+            })
+    }, [])
 
     const handleSubmit = e => {
         e.preventDefault()
@@ -28,6 +59,21 @@ export const LoginForm = () => {
 
     return(
         <div className="backgroundLayout items-center flex flex-col">
+
+            {(checkingServer && !serverReady) &&
+                <p className="text-center text-red-500 mb-4">
+                    Waking up server... (This can take 20-40 seconds)
+                </p>
+            }
+
+            {!serverReady &&
+                <div className="flex flex-col items-center justify-center mb-4">
+                    <p className="text-center text-red-500 mb-4">
+                        Server not available.
+                    </p>
+                    <button onClick={() => window.location.reload()}>Retry</button>
+                </div>
+            }
 
             <div className="w-1/2">
                 <p className="text-center text-xl font-bold mb-8">
@@ -62,12 +108,12 @@ export const LoginForm = () => {
                 </div>
 
                 {apiErrors.loginRequest && <p className="text-red-500 text-center mb-5">{apiErrors.loginRequest}</p>}
+
                 <div className="flex justify-center w-full">
                     <button type="submit">Login</button>
                 </div>
 
             </form>
-
         </div>
     )
 }

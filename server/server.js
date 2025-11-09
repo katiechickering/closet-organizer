@@ -17,6 +17,9 @@ app.use( cors( { origin: process.env.CORS_ORIGIN, credentials: true } ) )
 app.use(express.json())
 app.use(cookieParser())
 
+// wake up free server
+app.get("/v1/closetOrganizer/ping", (req, res) => res.sendStatus(200))
+
 app.use("/v1/closetOrganizer/clothingItem", clothingItemRouter)
 app.use("/v1/closetOrganizer/user", userRouter)
 
