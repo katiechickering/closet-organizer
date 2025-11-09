@@ -48,10 +48,15 @@ export const LoginForm = () => {
                     Welcome to the Closet Organizer app! Don't have an account yet?
                     Click the Register button above to sign up.
                 </p>
-                {!serverIsLoaded &&
-                    <p className="text-center text-red-500 mt-2">
-                        Please wait 20-40 seconds for the server to wake up... server loading...
-                    </p>
+                {serverIsLoaded
+                    ?
+                        <p className="text-center text-green-500 mt-2">
+                            Server is ready to go!
+                        </p>
+                    :
+                        <p className="text-center text-red-500 mt-2">
+                            Please wait 20-40 seconds for the server to wake up... server loading...
+                        </p>
                 }
             </div>
 
