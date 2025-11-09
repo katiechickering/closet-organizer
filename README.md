@@ -1,5 +1,7 @@
 # 👕 Closet Organizer
 
+Check out our deployed application [HERE](https://closet-organizer-chi.vercel.app/)
+
 
 ## 🌟 Highlights
 
@@ -12,54 +14,19 @@
 
 ## ℹ️ Overview
 
-This project was built with a Node.js and Express backend and a React frontend styled with Tailwind CSS. Created with an MVC structure, this app uses MongoDB for the model, an Express API as the controller, and React for the view. The clothing item feature provides full CRUD functionality. We implemented login and registration using JSON Web Tokens, stored in browser cookies for authentication. We noticed the inefficiency and inconvenience of physically going through tons of clothes and accessories. We created a better solution by being able to have access to your entire closet in the palm of your hand.
+This project was built with a Node.js and Express backend and a React frontend styled with Tailwind CSS. Created with an MVC structure, this app uses MongoDB for the model, an Express API as the controller, and React for the view. The clothing item feature provides full CRUD functionality. We implemented login and registration using JSON Web Tokens stored in browser cookies for authentication. We noticed the inefficiency and inconvenience of physically going through tons of clothes and accessories. We created a better solution by being able to have access to your entire closet in the palm of your hand.
+
+
+## 🚀 Deployment
+
+To deploy our application, we used Render for the backend server and Vercel for the frontend React application. Both services are connected to our GitHub monorepo and automatically update whenever changes are pushed to the repository. Render routes to our `server` folder, while Vercel routes to our `client` folder. We have included .env.example files in both our `client` and `server` folders to show how the environment variables are set up. To host our database, we used MongoDB Atlas.
 
 
 ## ✍️ Authors
 
-Shadrach Tercy - http://github.com/theclassic2
-
 Katie Chickering - https://github.com/katiechickering
 
-
-## 🛜 Deployment
-
-[Click here to view my deployed app!](https://main.dsrw9hnagm1lz.amplifyapp.com/)
-
-To deploy our application, we used AWS App Runner for the backend API, and AWS Amplify for the frontend. Both services are connected to this GitHub monorepo and automatically update whenever changes are pushed to the repository. Environment variables were configured through the App Runner and Amplify interfaces. App Runner routes to the `server` folder, while Amplify routes to the `client` folder. To host the database, we used MongoDB Atlas.
-
-
-## ⬇️ Local Installation
-
-Open two terminals and route to the `server` folder and `client` folder respectively.
-
-Run the command below in the `server` terminal:
-```bash
-npm install
-```
-
-Run the command below in the `client` terminal:
-```bash
-npm install
-```
-
-Then, create a `.env` file in both the `server` folder and `client` folder. Follow the instructions in the `.env.example` files to set up your environment variables.
-
-
-## 🚀 Local Usage
-
-First, run the command below in the `server` terminal:
-```bash
-npm start
-```
-
-Second, run the commands below in the `client` terminal:
-```bash
-npm run build
-npm run preview
-```
-
-Copy and paste http://localhost:4173/ into your browser to view the application!
+Shadrach Tercy - http://github.com/theclassic2
 
 
 ## 💭 Feedback and Contributing
