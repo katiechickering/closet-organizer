@@ -17,7 +17,7 @@ export const LoginForm = () => {
         pingServer()
             .then(res => {
                 setServerIsLoaded(true)
-                toast.success("Sever loaded!")
+                toast.success("Server loaded!")
             })
             .catch(error => {
                 console.log("pingServer error", error)
