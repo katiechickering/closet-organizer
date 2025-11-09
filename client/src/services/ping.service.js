@@ -1,4 +1,3 @@
-// src/services/ping.service.js
 import axios from "axios";
 
 const PING_INSTANCE = axios.create({
