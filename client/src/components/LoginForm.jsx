@@ -9,38 +9,19 @@ export const LoginForm = () => {
 
     const navigate = useNavigate()
     const { login: loginUser } = useLogin()
-
     const [ apiErrors, setApiErrors ] = useState({})
-    const [serverReady, setServerReady] = useState(false)
-    const [checkingServer, setCheckingServer] = useState(true)
-    const [loading, setLoading] = useState(true)
+    const [serverIsLoaded, setServerIsLoaded] = useState(false)
 
     // Wake the backend free server
     useEffect(() => {
         pingServer()
             .then(res => {
-                if (res) {
-                    setServerReady(true)
-                    setCheckingServer(false)
-                }
-                else toast.error("Server not ready")
+                setServerIsLoaded(true)
+                toast.success("Sever loaded!")
             })
             .catch(error => {
-                let attempts = 0
-                const interval = setInterval(async () => {
-                    attempts++
-                    if (await pingServer()) {
-                        setServerReady(true)
-                        clearInterval(interval)
-                    }
-                    if (attempts > 10) {
-                        clearInterval(interval)
-                        setCheckingServer(false)
-                        toast.error("Server not responding")
-                    }
-                }, 5000)
+                console.log("pingServer error", error)
             })
-            .finally(() => setLoading(false))
     }, [])
 
     const handleSubmit = e => {
@@ -62,26 +43,16 @@ export const LoginForm = () => {
     return(
         <div className="backgroundLayout items-center flex flex-col">
 
-            {(checkingServer && !serverReady && !loading) &&
-                <p className="text-center text-red-500 mb-4">
-                    Waking up server... (This can take 20-40 seconds)
-                </p>
-            }
-
-            {(!serverReady && !loading) &&
-                <div className="flex flex-col items-center justify-center mb-4">
-                    <p className="text-center text-red-500 mb-4">
-                        Server not available.
-                    </p>
-                    <button onClick={() => window.location.reload()}>Retry</button>
-                </div>
-            }
-
-            <div className="w-1/2">
-                <p className="text-center text-xl font-bold mb-8">
+            <div className="w-1/2 mb-8">
+                <p className="text-center text-xl font-bold">
                     Welcome to the Closet Organizer app! Don't have an account yet?
                     Click the Register button above to sign up.
                 </p>
+                {!serverIsLoaded &&
+                    <p className="text-center text-red-500 mt-2">
+                        Please wait 20-40 seconds for the server to wake up... server loading...
+                    </p>
+                }
             </div>
 
             <form onSubmit={handleSubmit} className="border-2 border-brandNavy bg-brandBlue text-brandNavy p-10 rounded">
