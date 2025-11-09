@@ -13,6 +13,7 @@ export const LoginForm = () => {
     const [ apiErrors, setApiErrors ] = useState({})
     const [serverReady, setServerReady] = useState(false)
     const [checkingServer, setCheckingServer] = useState(true)
+    const [loading, setLoading] = useState(true)
 
     // Wake the backend free server
     useEffect(() => {
@@ -39,6 +40,7 @@ export const LoginForm = () => {
                     }
                 }, 5000)
             })
+            .finally(() => setLoading(false))
     }, [])
 
     const handleSubmit = e => {
@@ -60,13 +62,13 @@ export const LoginForm = () => {
     return(
         <div className="backgroundLayout items-center flex flex-col">
 
-            {(checkingServer && !serverReady) &&
+            {(checkingServer && !serverReady && !loading) &&
                 <p className="text-center text-red-500 mb-4">
                     Waking up server... (This can take 20-40 seconds)
                 </p>
             }
 
-            {!serverReady &&
+            {(!serverReady && !loading) &&
                 <div className="flex flex-col items-center justify-center mb-4">
                     <p className="text-center text-red-500 mb-4">
                         Server not available.
