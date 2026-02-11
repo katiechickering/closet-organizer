@@ -10,7 +10,7 @@ Check out our deployed application [HERE](https://closet-organizer-chi.vercel.ap
 - **TailWind:** Front-end styling
 - **Vercel:** Front-end website deployment
 - **Render:** Backend server deployment
-- **Dev Tools:** VS Code, GitHub
+- **GitHub:** Version control & collaboration
 
 
 ## 🌟 Highlights
