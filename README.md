@@ -6,7 +6,7 @@ Check out our deployed application [HERE](https://closet-organizer-chi.vercel.ap
 ## 🛠️ Technologies Used
 
 - **Core Stack:** Vite, React, Node.js + Express, MongoDB
-- **Languages:** Javascript, JSX
+- **Languages:** Javascript
 - **TailWindCSS:** Front-end styling
 - **Vercel:** Front-end website deployment
 - **Render:** Backend server deployment
